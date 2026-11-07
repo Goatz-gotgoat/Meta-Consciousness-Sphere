@@ -1,4 +1,4 @@
-## Meta-Consciousness Sphere
+## meta-consciousness-sphere.html
 
 The Recursive Continuum folded into a sphere, part of Recursive Process Monism (RPM).
 
