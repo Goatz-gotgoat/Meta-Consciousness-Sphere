@@ -1,0 +1,1020 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Meta-Consciousness Sphere</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the figure as a stage you step through (flat map → folded sphere), then a short plain reading. Single dark world, matching the original infographic. */
+:root {
+  --ground: #0b0f19;
+  --panel: #111726;
+  --line: #222b3f;
+  --ink: #e8eaf2;
+  --muted: #9aa3b8;
+  --gold: #f2c14e;
+  --display: 'Bricolage Grotesque', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  --body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+main { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+
+header { display: flex; flex-direction: column; gap: 12px; max-width: 760px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin: 0; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(36px, 6vw, 64px); line-height: 1.02; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+.lede { font-size: 19px; line-height: 1.55; color: var(--muted); margin: 0; max-width: 62ch; }
+
+.stage { display: flex; flex-direction: column; gap: 16px; }
+.canvas-wrap { position: relative; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--ground); }
+canvas { display: block; width: 100%; aspect-ratio: 16 / 10; cursor: grab; touch-action: pan-y; }
+canvas:active { cursor: grabbing; }
+@media (max-width: 640px) { canvas { aspect-ratio: 1 / 1.05; } }
+.hint { position: absolute; right: 12px; top: 10px; font-family: var(--mono); font-size: 11px; color: var(--muted); opacity: 0.8; pointer-events: none; }
+.views { position: absolute; left: 12px; bottom: 12px; display: flex; gap: 0; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--ground) 85%, transparent); padding: 3px; }
+.views button { font-family: var(--mono); font-size: 12px; color: var(--muted); background: none; border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+.views button[aria-pressed="true"] { background: var(--gold); color: var(--ground); }
+
+.steps { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.steps button { font-family: var(--mono); font-size: 13px; color: var(--muted); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; cursor: pointer; display: flex; gap: 8px; align-items: baseline; }
+.steps button span { color: var(--gold); opacity: 0.7; }
+.steps button[aria-current="step"] { color: var(--ink); border-color: var(--gold); }
+.steps button[aria-current="step"] span { opacity: 1; }
+
+.caption { display: flex; flex-direction: column; gap: 12px; max-width: 68ch; min-height: 11.5em; }
+.caption h2 { font-family: var(--display); font-weight: 500; font-size: 26px; margin: 0; text-wrap: balance; }
+.caption p { margin: 0; font-size: 18px; line-height: 1.6; }
+.nav { display: flex; gap: 10px; }
+.nav button { font-family: var(--mono); font-size: 13px; color: var(--ink); background: none; border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; cursor: pointer; }
+.nav button:disabled { opacity: 0.35; cursor: default; }
+button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.reading { display: flex; flex-direction: column; gap: 28px; max-width: 760px; border-top: 1px solid var(--line); padding-top: 36px; }
+.reading h2 { font-family: var(--display); font-weight: 700; font-size: 30px; margin: 0; }
+.claims { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 760px) { .claims { grid-template-columns: minmax(0, 1fr); } }
+.claim { display: flex; flex-direction: column; gap: 8px; }
+.claim h3 { font-family: var(--display); font-weight: 500; font-size: 19px; margin: 0; color: var(--gold); }
+.claim p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ink); }
+.reading > p { margin: 0; font-size: 18px; line-height: 1.65; }
+.note { font-size: 15px !important; color: var(--muted); }
+
+.context { display: flex; flex-direction: column; gap: 14px; }
+.context h3 { margin: 0; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.context dl { margin: 0; display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); gap: 10px 20px; font-size: 16px; line-height: 1.55; }
+.context dt { color: var(--gold); font-family: var(--display); }
+.context dd { margin: 0; min-width: 0; }
+@media (max-width: 560px) { .context dl { grid-template-columns: minmax(0, 1fr); gap: 2px; } .context dd { margin-bottom: 10px; } }
+a { color: var(--gold); }
+.apotheosis { display: flex; flex-direction: column; gap: 16px; border-top: 1px solid var(--line); padding-top: 36px; }
+.apotheosis header { gap: 10px; }
+.apotheosis h2 { font-family: var(--display); font-weight: 700; font-size: clamp(28px, 4vw, 40px); margin: 0; text-wrap: balance; }
+.apotheosis p { margin: 0; font-size: 18px; line-height: 1.6; max-width: 68ch; }
+#field-stage { position: relative; height: min(78vh, 760px); min-height: 420px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 20%, #0c0e22 0%, #02030a 72%), #050611; }
+#field-stage canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+.field-hint { position: absolute; right: 12px; bottom: 10px; font-family: var(--mono); font-size: 11px; color: var(--muted); pointer-events: none; }
+.keys { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; margin: 0; padding: 0; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.keys li { display: flex; align-items: center; gap: 8px; }
+.keys i { width: 8px; height: 8px; border-radius: 999px; display: inline-block; }
+</style>
+
+<main>
+  <header>
+    <p class="eyebrow">Recursive Process Monism</p>
+    <h1>Meta-consciousness</h1>
+    <p class="lede">Fold the Recursive Continuum into a sphere. Its outer edge closes into one joint, the Horizon of Knowing, and meta-consciousness sits at the core. The dark background stands for consciousness itself. Step through the fold below.</p>
+  </header>
+
+  <section class="stage" aria-label="The fold, step by step">
+    <div class="canvas-wrap">
+      <canvas id="sphere" role="img" aria-label="Recursive Continuum figure"></canvas>
+      <div class="hint" id="hint">Drag to turn</div>
+      <div class="views" id="views" hidden>
+        <button type="button" id="view-within" aria-pressed="false">From within</button>
+        <button type="button" id="view-whole" aria-pressed="true">As the whole</button>
+      </div>
+    </div>
+    <ol class="steps" id="steps"></ol>
+    <div class="caption" aria-live="polite">
+      <h2 id="cap-title"></h2>
+      <p id="cap-text"></p>
+      <div class="nav">
+        <button type="button" id="prev">Back</button>
+        <button type="button" id="next">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="apotheosis" aria-label="Apotheosis">
+    <header>
+      <p class="eyebrow">Apotheosis</p>
+      <h2>The field, alive</h2>
+    </header>
+    <p>Everything above, in motion. Each node is a cluster of tumbling figure-eights inside its own sphere. The chains run over the surface from Reality to the Horizon of Knowing, and every node except the quantum limits loops into meta-consciousness at the core. The quantum limits alone are pushed outward: their field lines bow away from the core and can only bend back to the horizon. Around it all, the dark field stands for consciousness.</p>
+    <div id="field-stage" role="img" aria-label="Three-dimensional particle field: figure-eight clusters wrapped over a sphere, node spheres joined by lines, spokes and core loops into a gold core labelled meta-consciousness, and field lines from the four quantum limits curving outward to the Horizon of Knowing.">
+      <div class="field-hint">Drag to turn</div>
+    </div>
+    <ul class="keys">
+      <li><i style="background:#ffe4a8"></i>Reality</li>
+      <li><i style="background:#ffb6a6"></i>Person A</li>
+      <li><i style="background:#a6c3ff"></i>Person B</li>
+      <li><i style="background:#ff8787"></i>Lived A</li>
+      <li><i style="background:#7fd4ff"></i>Lived B</li>
+      <li><i style="background:#f2c14e"></i>Cosmos</li>
+      <li><i style="background:#ffd98a"></i>DNA / Atoms</li>
+      <li><i style="background:#fff1c9"></i>Quantum limits</li>
+      <li><i style="background:#a5b4fc"></i>Horizon of Knowing</li>
+      <li><i style="background:#ffc94a"></i>Meta-consciousness</li>
+    </ul>
+    <p class="note">Full screen, with zoom: <a href="https://claude.ai/artifact/52sXgCoQd6r25F2xeY7nAB">Meta-Consciousness Field</a>.</p>
+  </section>
+
+  <section class="reading" aria-label="What the sphere says">
+    <h2>What the sphere says</h2>
+    <div class="claims">
+      <div class="claim">
+        <h3>Duality holds from within</h3>
+        <p>Lived and seen, subject and object, self and world are real distinctions. They are how any part meets the rest.</p>
+      </div>
+      <div class="claim">
+        <h3>Nonduality holds for the whole</h3>
+        <p>None of those distinctions splits the continuum into separate worlds. They all arise inside one whole.</p>
+      </div>
+      <div class="claim">
+        <h3>The bind stays</h3>
+        <p>A part cannot step outside the whole to see it entire. Every description made from inside leaves a residue, and it never reaches zero.</p>
+      </div>
+    </div>
+    <p>The black background stands for consciousness itself. Dark here means unlit, not empty. Consciousness is what everything appears in, so it is never one of the things that appear. Meta-consciousness at the core is only a way of drawing how it interconnects.</p>
+    <p>That explains why the search for consciousness keeps failing in the same way. You cannot find darkness by shining a light on it, because wherever the light lands, the darkness is gone. Observing is a light: it shows things, never the ground they appear in. From the inside the picture flips. There, consciousness is not dark at all. It is the light you see everything by, and a light cannot be lit by another light. Dark from the outside and light from the inside are two descriptions of one thing, which is the figure's duality and nonduality again.</p>
+    <p>Quantum physics approaches the continuum from the seen side, through measurement, and has several formulations that never quite close. The study of consciousness approaches it from the lived side, through experience, and stalls at the hard problem. On this view both are parts describing the whole from inside it, so the shared wall is expected. It follows from where the observer stands.</p>
+    <p class="note">The quantum labels mark where description runs out. Placing them on the sphere expresses a proposed philosophical relationship. It does not claim a demonstrated physical mechanism.</p>
+
+    <div class="context">
+      <h3>Context for later chats</h3>
+      <dl>
+        <dt>Consciousness</dt><dd>The black background, the page included. Every node, loop and horizon appears within it. Dark means unlit from the outside, not empty; from the inside it is the light everything is seen by.</dd>
+        <dt>Meta-consciousness</dt><dd>The core of the sphere, equally near every point on it. Every surface node loops into it. It is a figure drawn to illustrate how consciousness interconnects; consciousness itself is the dark ground.</dd>
+        <dt>Horizon of Knowing</dt><dd>The limit of human understanding. The joint behind Reality where the four outer ends meet: as far as any line of inquiry reaches, from the lived side or the seen side.</dd>
+        <dt>The fold</dt><dd>On the flat map, the Horizon of Knowing is the yellow edge around everything. Folded, that edge becomes one point opposite Reality.</dd>
+        <dt>Outer figure-eights</dt><dd>Each extremity (lived A, lived B, cosmos, DNA and atoms) runs on through figure-eights to a quantum limit: field at both sides, entanglement at the top, foam at the bottom.</dd>
+        <dt>Core loops</dt><dd>Figure-eights from every surface node to meta-consciousness at the centre: Reality, both people, both lived selves, cosmos, DNA and atoms, and the Horizon of Knowing. The quantum limits have none. With the core loops the structure is recursive inward and outward, with no privileged start.</dd>
+        <dt>Light and darkness</dt><dd>Looking for consciousness by observing is like shining a light to find darkness: the light removes what it was sent to find. Darkness is found by its edges and by contrast, which is also how consciousness science makes progress, comparing conscious with unconscious states.</dd>
+        <dt>Hard Recursive Bind</dt><dd>The permanent gap between the view from within (duality) and the whole (nonduality). It is a consequence of the observer being part of what it describes.</dd>
+      </dl>
+      <p class="note">Builds on <a href="https://claude.ai/code/artifact/c02d7cb5-0bd6-4d73-b7f3-f6b88039ad31">Recursive Continuum</a>. Where they differ on the flat map, that page takes precedence.</p>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+
+<script>
+(() => {
+  const PI = Math.PI;
+  const C = {
+    ground: '#0b0f19', ink: '#e8eaf2', muted: '#9aa3b8', gold: '#f2c14e',
+    purple: '#c084fc', cyan: '#22d3ee', green: '#34d399', orange: '#fb923c',
+    pink: '#f472b6', white: '#e5e7eb', red: '#f0525a', felt: '#4ade80'
+  };
+
+  // Every point lives in (theta, phi): theta = distance from Reality, phi = direction.
+  // Flat = azimuthal map around Reality (theta = PI is the yellow edge). Folded = unit sphere.
+  const N = {
+    R:  { th: 0,        ph: 0,      lines: ['Society /', 'Reality'], color: C.white },
+    PA: { th: .34 * PI, ph: 0,      lines: ['Person A'], sub: 'seen', subColor: C.red, color: C.green },
+    LA: { th: .64 * PI, ph: 0,      lines: ['Phenomen-', 'ological A'], sub: 'lived', subColor: C.felt, color: C.orange },
+    PB: { th: .34 * PI, ph: PI,     lines: ['Person B'], sub: 'seen', subColor: C.red, color: C.cyan },
+    LB: { th: .64 * PI, ph: PI,     lines: ['Phenomen-', 'ological B'], sub: 'lived', subColor: C.felt, color: C.purple },
+    CO: { th: .5 * PI,  ph: PI / 2, lines: ['Cosmos /', 'Universe'], color: C.pink },
+    DN: { th: .5 * PI,  ph: -PI / 2, lines: ['DNA /', 'Atoms'], color: C.white },
+    QA: { th: .87 * PI, ph: 0,      q: 'Quantum field' },
+    QB: { th: .87 * PI, ph: PI,     q: 'Quantum field' },
+    QE: { th: .87 * PI, ph: PI / 2, q: 'Entanglement' },
+    QF: { th: .87 * PI, ph: -PI / 2, q: 'Quantum foam' },
+    H:  { th: PI,       ph: 0,      lines: ['Horizon of', 'Knowing'], color: '#a5b4fc', horizon: true }
+  };
+  const L = (a, b, color, layer, mid) => ({ a, b, color, layer, mid });
+  const LINKS = [
+    L('LB', 'PB', C.purple, 'base', 'Universal consciousness'),
+    L('PB', 'R', C.cyan, 'base', 'Nexus B'),
+    L('R', 'PA', C.green, 'base', 'Nexus A'),
+    L('PA', 'LA', C.orange, 'base', 'Universal consciousness'),
+    L('CO', 'R', C.pink, 'base', 'Macro nexus'),
+    L('R', 'DN', C.white, 'base', 'Micro nexus'),
+    L('LA', 'QA', C.orange, 'ext'), L('LB', 'QB', C.purple, 'ext'),
+    L('CO', 'QE', C.pink, 'ext'), L('DN', 'QF', C.white, 'ext'),
+    L('QA', 'H', C.gold, 'ext'), L('QB', 'H', C.gold, 'ext'),
+    L('QE', 'H', C.gold, 'ext'), L('QF', 'H', C.gold, 'ext')
+  ];
+  const CORES = ['R', 'PA', 'PB', 'LA', 'LB', 'CO', 'DN', 'H'];
+
+  const STEPS = [
+    { name: 'Flat map', title: 'The map you started with',
+      text: 'This is the Recursive Continuum as you first drew it. Each person appears twice, as lived and as seen. Two people meet only through shared reality in the middle. Cosmos sits above, DNA and atoms below, and a yellow edge holds everything.',
+      t: { fold: 0, ext: 0, meta: 0, core: 0, shell: 0 } },
+    { name: 'Ends', title: 'The four ends reach the edge',
+      text: 'Each outer end gets figure-eights of its own, running out to the edge. These are the places where description runs out: the quantum field at both sides, entanglement at the top, quantum foam at the bottom. Physics reaches them from the seen side, in formulations that never quite close.',
+      t: { fold: 0, ext: 1, meta: 0, core: 0, shell: 0 } },
+    { name: 'Fold', title: 'The edge closes',
+      text: 'Fold the map. The yellow edge closes into a single joint behind Reality, where all four ends meet the way the two axes meet at Reality. This joint is the Horizon of Knowing: as far as any line of inquiry reaches. Drag to turn the sphere and find it.',
+      t: { fold: 1, ext: 1, meta: 1, core: 0, shell: 0 } },
+    { name: 'Core', title: 'Meta-consciousness at the core',
+      text: 'Meta-consciousness sits at the centre of the sphere, equally near every point on it. Every node on the surface loops into it through a figure-eight: Reality, both people, both lived selves, cosmos, DNA and atoms, and the Horizon of Knowing. The quantum limits stay as they are. Now every level is recursive, inward and outward.',
+      t: { fold: 1, ext: 1, meta: 1, core: 1, shell: 0 } },
+    { name: 'Both views', title: 'Both views hold',
+      text: 'From within, meta-consciousness is a hidden core that every node loops back to, and the Horizon of Knowing is as far as understanding reaches. That is duality. As the whole, the core fills the sphere and every distinction sits inside it. That is nonduality. Both are valid, and the gap between them is the Hard Recursive Bind.',
+      t: { fold: 1, ext: 1, meta: 1, core: 1, shell: 1 } },
+    { name: 'Ground', title: 'The background is consciousness',
+      text: 'The black background stands for consciousness. Dark here means unlit, not empty: it is what everything appears in. Meta-consciousness at the core only illustrates how it interconnects. Move your pointer or finger to shine a light. Wherever the light falls, the dark is gone, so a light can never find it. Observing works the same way. Seen from inside, the same consciousness is the light you see by, which is why no other light can show it.',
+      t: { fold: 1, ext: 1, meta: 1, core: 1, shell: 0, ground: 1 } }
+  ];
+
+  const S = { fold: 0, ext: 0, meta: 0, core: 0, shell: 0, ground: 0, yaw: -0.62, pitch: 0.3 };
+  let T = { ground: 0, ...STEPS[0].t }, step = 0, whole = true;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- UI ----
+  const stepsEl = document.getElementById('steps');
+  STEPS.forEach((s, i) => {
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.type = 'button'; b.id = 'step-' + (i + 1);
+    b.innerHTML = '<span>' + (i + 1) + '</span>' + s.name;
+    b.addEventListener('click', () => go(i));
+    li.appendChild(b); stepsEl.appendChild(li);
+  });
+  const views = document.getElementById('views');
+  const bWithin = document.getElementById('view-within'), bWhole = document.getElementById('view-whole');
+  bWithin.addEventListener('click', () => setWhole(false));
+  bWhole.addEventListener('click', () => setWhole(true));
+  document.getElementById('prev').addEventListener('click', () => go(step - 1));
+  document.getElementById('next').addEventListener('click', () => go(step + 1));
+
+  function setWhole(v) {
+    whole = v;
+    bWithin.setAttribute('aria-pressed', String(!v));
+    bWhole.setAttribute('aria-pressed', String(v));
+    T.shell = step === 4 ? (v ? 1 : 0.12) : 0;
+  }
+  function go(i) {
+    step = Math.max(0, Math.min(STEPS.length - 1, i));
+    const s = STEPS[step];
+    T = { ground: 0, ...s.t };
+    if (step === 4) T.shell = whole ? 1 : 0.12;
+    document.getElementById('cap-title').textContent = s.title;
+    document.getElementById('cap-text').textContent = s.text;
+    stepsEl.querySelectorAll('button').forEach((b, j) => {
+      if (j === step) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    });
+    document.getElementById('prev').disabled = step === 0;
+    document.getElementById('next').disabled = step === STEPS.length - 1;
+    views.hidden = step !== 4;
+    document.getElementById('hint').hidden = step < 2;
+    canvas.setAttribute('aria-label', 'Step ' + (step + 1) + ': ' + s.title + '. ' + s.text);
+    if (reduce) Object.assign(S, T);
+  }
+
+  // ---- geometry ----
+  const canvas = document.getElementById('sphere');
+  const ctx = canvas.getContext('2d');
+  const K = 0.55, AX = 1.3, D = 4;
+  let W = 0, H = 0, scale = 1, cx = 0, cy = 0, dpr = 1;
+
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+  const mul = (a, k) => [a[0] * k, a[1] * k, a[2] * k];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const norm = a => { const l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0] / l, a[1] / l, a[2] / l]; };
+
+  function world(th, ph) {
+    const f = S.fold;
+    const flat = [K * th * AX * Math.cos(ph), K * th * Math.sin(ph), 1];
+    const sph = [Math.sin(th) * Math.cos(ph), Math.sin(th) * Math.sin(ph), Math.cos(th)];
+    const p = [lerp(flat[0], sph[0], f), lerp(flat[1], sph[1], f), lerp(flat[2], sph[2], f)];
+    const n = norm([lerp(0, sph[0], f), lerp(0, sph[1], f), lerp(1, sph[2], f)]);
+    return { p, n };
+  }
+  function proj(P) {
+    const yaw = S.yaw * S.fold, pitch = S.pitch * S.fold;
+    const x1 = P[0] * Math.cos(yaw) + P[2] * Math.sin(yaw);
+    const z1 = -P[0] * Math.sin(yaw) + P[2] * Math.cos(yaw);
+    const y2 = P[1] * Math.cos(pitch) - z1 * Math.sin(pitch);
+    const z2 = P[1] * Math.sin(pitch) + z1 * Math.cos(pitch);
+    const s = D / (D - z2);
+    return { x: cx + x1 * scale * s, y: cy - y2 * scale * s, z: z2, s };
+  }
+  const depthA = z => lerp(1, 0.22 + 0.78 * (z + 1) / 2, S.fold);
+
+  function resize() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    const r = canvas.getBoundingClientRect();
+    W = r.width; H = r.height;
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+  }
+  new ResizeObserver(resize).observe(canvas);
+  resize();
+
+  // A figure-eight joint between two points: two strands that cross at the midpoint.
+  function strandPoints(pathFn, w, n) {
+    const out = [[], []];
+    for (let i = 0; i <= n; i++) {
+      const s = i / n;
+      const { p, nrm } = pathFn(s);
+      const { p: p2 } = pathFn(Math.min(1, s + 0.01));
+      const { p: p1 } = pathFn(Math.max(0, s - 0.01));
+      const tan = norm(sub(p2, p1));
+      const perp = norm(cross(tan, nrm));
+      const o = w * Math.cos(PI * s);
+      out[0].push(add(p, mul(perp, o)));
+      out[1].push(add(p, mul(perp, -o)));
+    }
+    return out;
+  }
+  const surfacePath = (A, B) => s => {
+    const ph = A.th === 0 ? B.ph : (B.th === 0 || B.th === PI) ? A.ph : lerp(A.ph, B.ph, s);
+    const r = world(lerp(A.th, B.th, s), ph);
+    return { p: r.p, nrm: r.n };
+  };
+  const corePath = (A) => {
+    const pa = world(A.th, A.ph).p;
+    const t = norm(pa);
+    const ref = Math.abs(t[1]) > 0.85 ? [1, 0, 0] : [0, 1, 0];
+    const nrm = norm(cross(t, ref));
+    return s => ({ p: mul(pa, 1 - s), nrm });
+  };
+
+  function fontPx(k) { return Math.max(9, Math.min(17, scale * k)); }
+
+  function textWithHalo(str, x, y, color, size, weight, family, align) {
+    ctx.font = (weight || 600) + ' ' + size + 'px ' + (family || "'Bricolage Grotesque', system-ui, sans-serif");
+    ctx.textAlign = align || 'center'; ctx.textBaseline = 'middle';
+    ctx.lineWidth = 4; ctx.strokeStyle = C.ground; ctx.lineJoin = 'round';
+    ctx.strokeText(str, x, y);
+    ctx.fillStyle = color; ctx.fillText(str, x, y);
+  }
+
+  function frame() {
+    if (!reduce) {
+      for (const k of ['fold', 'ext', 'meta', 'core', 'shell', 'ground']) {
+        const d = T[k] - S[k];
+        S[k] = Math.abs(d) < 0.001 ? T[k] : S[k] + d * 0.06;
+      }
+      if (!dragging && S.fold > 0.98) S.yaw += 0.0022;
+    }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = C.ground; ctx.fillRect(0, 0, W, H);
+    if (S.ground > 0.01) {
+      const fs = Math.max(11, Math.min(15, W / 70));
+      ctx.font = 'italic 400 ' + fs + "px 'Source Serif 4', Georgia, serif";
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#8f9bc4'; ctx.globalAlpha = 0.16 * S.ground;
+      const gx = fs * 9, gy = fs * 3.2;
+      for (let row = 0, y = gy / 2; y < H; y += gy, row++) {
+        for (let x = (row % 2 ? gx / 2 : 0) + gx / 4; x < W + gx; x += gx) ctx.fillText('consciousness', x, y);
+      }
+      ctx.globalAlpha = 1;
+    }
+    cx = W / 2; cy = H / 2 + (W < 640 ? 6 : 10);
+    const flatScale = Math.min(W / 2 / 2.5, H / 2 / 2.05) * 0.86;
+    const sphScale = Math.min(W, H) / 2 / 1.75;
+    scale = lerp(flatScale, sphScale, S.fold);
+    const narrow = W < 560;
+    const items = [];
+
+    // sphere body
+    const c0 = proj([0, 0, 0]);
+    const rad = scale * c0.s;
+    if (S.fold > 0.01) {
+      const g = ctx.createRadialGradient(c0.x - rad * 0.3, c0.y - rad * 0.3, rad * 0.1, c0.x, c0.y, rad);
+      g.addColorStop(0, 'rgba(242,193,78,' + (0.03 + 0.16 * S.shell) * S.fold + ')');
+      g.addColorStop(1, 'rgba(242,193,78,' + (0.01 + 0.07 * S.shell) * S.fold + ')');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(c0.x, c0.y, rad, 0, 2 * PI); ctx.fill();
+    }
+
+    // the yellow edge (theta = PI): an ellipse when flat, one point when folded
+    const EDGE = 96;
+    let prev = null;
+    for (let i = 0; i <= EDGE; i++) {
+      const ph = i / EDGE * 2 * PI;
+      const q = proj(world(PI, ph).p);
+      if (prev) {
+        const a = prev, b = q;
+        items.push({ z: (a.z + b.z) / 2 - 0.02, draw: () => {
+          ctx.strokeStyle = C.gold; ctx.globalAlpha = 0.9 * depthA((a.z + b.z) / 2) * (1 - S.fold * 0.6);
+          ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        } });
+      }
+      prev = q;
+    }
+
+    const nodeDim = (1 - 0.5 * S.shell) * (1 - 0.35 * S.ground);
+    function pushStrands(pts, color, alpha, width) {
+      for (const strand of pts) {
+        const P = strand.map(proj);
+        for (let i = 1; i < P.length; i++) {
+          const a = P[i - 1], b = P[i];
+          const z = (a.z + b.z) / 2;
+          items.push({ z, draw: () => {
+            const da = depthA(z) * alpha;
+            ctx.strokeStyle = color;
+            ctx.globalAlpha = da * 0.18; ctx.lineWidth = width * 3.2;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+            ctx.globalAlpha = da; ctx.lineWidth = width;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          } });
+        }
+      }
+    }
+    const lw = Math.max(2, scale * 0.022);
+
+    for (const l of LINKS) {
+      const A = N[l.a], B = N[l.b];
+      const al = (l.layer === 'base' ? 1 : S.ext) * nodeDim;
+      if (al < 0.01) continue;
+      pushStrands(strandPoints(surfacePath(A, B), 0.12, 40), l.color, al, lw);
+      if (l.mid && !narrow) {
+        const m = proj(surfacePath(A, B)(0.5).p);
+        const verticalLink = Math.abs(Math.sin(A.ph || B.ph)) > 0.5;
+        items.push({ z: m.z + 0.01, draw: () => {
+          ctx.globalAlpha = depthA(m.z) * 0.85 * nodeDim;
+          const off = verticalLink ? [scale * 0.3, 0] : [0, -scale * 0.2];
+          textWithHalo(l.mid, m.x + off[0], m.y + off[1], C.muted, fontPx(0.05), 500, "'JetBrains Mono', ui-monospace, monospace", verticalLink ? 'left' : 'center');
+        } });
+      }
+    }
+    if (S.core > 0.01) {
+      for (const k of CORES) {
+        const n = N[k];
+        const a = S.core * (k === 'H' ? Math.pow(S.fold, 4) : 1) * (1 - 0.25 * S.shell);
+        pushStrands(strandPoints(corePath(n), 0.075, 36), n.color, a * 0.85, lw * 0.8);
+      }
+    }
+
+    // nodes
+    for (const key in N) {
+      const n = N[key];
+      const q = proj(world(n.th, n.ph).p);
+      if (n.q) {
+        items.push({ z: q.z + 0.02, draw: () => {
+          const r = scale * 0.085 * q.s;
+          ctx.globalAlpha = depthA(q.z) * nodeDim;
+          ctx.fillStyle = C.ground; ctx.beginPath(); ctx.arc(q.x, q.y, r, 0, 2 * PI); ctx.fill();
+          ctx.setLineDash([5, 4]); ctx.strokeStyle = C.gold; ctx.lineWidth = 2.5; ctx.stroke(); ctx.setLineDash([]);
+          // label outward from the figure's centre
+          let dx = q.x - c0.x, dy = q.y - c0.y; const dl = Math.hypot(dx, dy) || 1; dx /= dl; dy /= dl;
+          const fs = fontPx(0.055);
+          const lx = q.x + dx * (r + fs * 0.6), ly = q.y + dy * (r + fs * 0.9);
+          textWithHalo(n.q, lx, ly, C.gold, fs, 600, null, Math.abs(dx) > 0.6 ? (dx > 0 ? 'left' : 'right') : 'center');
+        } });
+        continue;
+      }
+      const hz = n.horizon ? S.meta * Math.pow(S.fold, 4) : 1;
+      if (hz < 0.01) continue;
+      items.push({ z: q.z + 0.02, draw: () => {
+        const r = scale * 0.16 * q.s;
+        const da = depthA(q.z) * nodeDim * hz;
+        ctx.globalAlpha = da;
+        ctx.fillStyle = C.ground; ctx.globalAlpha = da * 0.9;
+        ctx.beginPath(); ctx.arc(q.x, q.y, r, 0, 2 * PI); ctx.fill();
+        ctx.globalAlpha = da; ctx.strokeStyle = n.color; ctx.lineWidth = Math.max(2, scale * 0.016); ctx.stroke();
+        const fs = fontPx(0.064);
+        const total = n.lines.length + (n.sub ? 1 : 0);
+        let y = q.y - (total - 1) * fs * 0.58;
+        for (const line of n.lines) { textWithHalo(line, q.x, y, C.ink, fs, 700); y += fs * 1.16; }
+        if (n.sub) textWithHalo(n.sub, q.x, y, n.subColor, fs * 0.92, 500);
+      } });
+    }
+
+    // meta-consciousness at the core
+    if (S.core > 0.01) {
+      const q = c0;
+      items.push({ z: 0.005, draw: () => {
+        const a = S.core * S.fold;
+        const r = scale * 0.17 * q.s;
+        const g = ctx.createRadialGradient(q.x, q.y, 0, q.x, q.y, r * 2.6);
+        g.addColorStop(0, 'rgba(255,236,170,' + 0.8 * a + ')');
+        g.addColorStop(1, 'rgba(242,193,78,0)');
+        ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q.x, q.y, r * 2.6, 0, 2 * PI); ctx.fill();
+        ctx.globalAlpha = a * (1 - 0.4 * S.shell);
+        ctx.fillStyle = C.ground; ctx.beginPath(); ctx.arc(q.x, q.y, r, 0, 2 * PI); ctx.fill();
+        ctx.strokeStyle = C.gold; ctx.lineWidth = 3; ctx.stroke();
+        const fs = fontPx(0.06);
+        textWithHalo('Meta-', q.x, q.y - fs * 0.6, '#fff3cf', fs, 700);
+        textWithHalo('consciousness', q.x, q.y + fs * 0.6, '#fff3cf', fs, 700);
+      } });
+    }
+
+    items.sort((a, b) => a.z - b.z);
+    for (const it of items) it.draw();
+    ctx.globalAlpha = 1;
+
+    if (S.shell > 0.05) {
+      ctx.globalAlpha = S.shell;
+      ctx.strokeStyle = C.gold; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(c0.x, c0.y, rad, 0, 2 * PI); ctx.stroke();
+      ctx.globalAlpha = S.shell * 0.25; ctx.lineWidth = 10; ctx.stroke();
+      ctx.globalAlpha = S.shell;
+      textWithHalo('Meta-consciousness: the whole', c0.x, Math.min(H - 16, c0.y + rad + 30), C.gold, fontPx(0.07), 700);
+      ctx.globalAlpha = 1;
+    } else if (S.fold > 0.05) {
+      ctx.globalAlpha = 0.18 * S.fold; ctx.strokeStyle = C.gold; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(c0.x, c0.y, rad, 0, 2 * PI); ctx.stroke(); ctx.globalAlpha = 1;
+    }
+    if (S.ground > 0.01) {
+      let lp = light;
+      if (!lp) { const tt = performance.now() / 1000; lp = { x: W / 2 + Math.sin(tt * 0.5) * W * 0.32, y: H / 2 + Math.sin(tt * 0.77) * H * 0.28 }; }
+      const lr = Math.min(W, H) * 0.2;
+      const lg = ctx.createRadialGradient(lp.x, lp.y, 0, lp.x, lp.y, lr);
+      lg.addColorStop(0, 'rgba(236,240,255,' + 0.92 * S.ground + ')');
+      lg.addColorStop(0.55, 'rgba(214,222,245,' + 0.75 * S.ground + ')');
+      lg.addColorStop(1, 'rgba(214,222,245,0)');
+      ctx.fillStyle = lg; ctx.beginPath(); ctx.arc(lp.x, lp.y, lr, 0, 2 * PI); ctx.fill();
+      ctx.globalAlpha = S.ground;
+      ctx.font = '500 ' + fontPx(0.055) + "px 'JetBrains Mono', ui-monospace, monospace"; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#4a536e'; ctx.fillText('no darkness here', lp.x, lp.y);
+      ctx.globalAlpha = 1;
+    }
+    if (S.fold < 0.05) {
+      textWithHalo('Distinction without separation', 14, 20, C.muted, fontPx(0.05), 500, "'JetBrains Mono', ui-monospace, monospace", 'left');
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // ---- drag to turn ----
+  let dragging = false, lx = 0, ly = 0, light = null;
+  const setLight = e => { const r = canvas.getBoundingClientRect(); light = { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  canvas.addEventListener('pointermove', setLight);
+  canvas.addEventListener('pointerdown', setLight);
+  canvas.addEventListener('pointerleave', () => { light = null; });
+  canvas.addEventListener('pointerdown', e => { dragging = true; lx = e.clientX; ly = e.clientY; canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener('pointermove', e => {
+    if (!dragging || S.fold < 0.5) return;
+    S.yaw += (e.clientX - lx) * 0.008;
+    if (e.pointerType === 'mouse') S.pitch = Math.max(-1.2, Math.min(1.2, S.pitch + (e.clientY - ly) * 0.008));
+    lx = e.clientX; ly = e.clientY;
+  });
+  const end = () => { dragging = false; };
+  canvas.addEventListener('pointerup', end); canvas.addEventListener('pointercancel', end);
+  document.addEventListener('keydown', e => {
+    if (e.target.closest && e.target.closest('input, textarea')) return;
+    if (e.key === 'ArrowRight') go(step + 1);
+    if (e.key === 'ArrowLeft') go(step - 1);
+  });
+
+  go(0);
+  requestAnimationFrame(frame);
+})();
+</script>
+<script>
+(function(){
+  const stage = document.getElementById('field-stage');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 1, 8000);
+  const camState = { radius: 1000, theta: 1.05, phi: 1.2 };
+  function updateCamera(){
+    const sp = Math.sin(camState.phi);
+    camera.position.set(
+      camState.radius * sp * Math.cos(camState.theta),
+      camState.radius * Math.cos(camState.phi),
+      camState.radius * sp * Math.sin(camState.theta)
+    );
+    camera.lookAt(0, 0, 0);
+  }
+  updateCamera();
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setClearColor(0x000000, 0);
+  stage.appendChild(renderer.domElement);
+  function resize(){
+    const w = stage.clientWidth, h = stage.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camState.radius = w < 640 ? 1300 : 1000;
+    camera.updateProjectionMatrix();
+    updateCamera();
+  }
+  new ResizeObserver(resize).observe(stage);
+  resize();
+
+  function makeGlowTexture(){
+    const size = 64, c = document.createElement('canvas');
+    c.width = c.height = size;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+    g.addColorStop(0.0, 'rgba(255,255,255,1)');
+    g.addColorStop(0.3, 'rgba(255,255,255,0.55)');
+    g.addColorStop(0.6, 'rgba(255,255,255,0.15)');
+    g.addColorStop(1.0, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, size, size);
+    const t = new THREE.CanvasTexture(c); t.needsUpdate = true; return t;
+  }
+  const glowTex = makeGlowTexture();
+  function pointsMat(color, size, opacity){
+    return new THREE.PointsMaterial({ size, map: glowTex, color, transparent: true, opacity,
+      depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true });
+  }
+
+  // --- the sphere: theta = distance from Reality (front pole), phi = direction ---
+  const RS = 300;
+  const PI = Math.PI;
+  function P(th, ph, r){
+    r = r || RS;
+    return new THREE.Vector3(r * Math.sin(th) * Math.cos(ph), r * Math.sin(th) * Math.sin(ph), r * Math.cos(th));
+  }
+
+  const COL = {
+    LB: 0x7fd4ff, PB: 0xa6c3ff, PA: 0xffb6a6, LA: 0xff8787,
+    CO: 0xf2c14e, DN: 0xffd98a, Q: 0xfff1c9, H: 0xa5b4fc, R: 0xffe4a8, M: 0xffc94a
+  };
+
+  // Chain segments over the surface. Each is a cluster of four tumbling figure-eights,
+  // as in the Recursive Continuum Field, spanning a chord between two surface points.
+  const CHAINS = [
+    // horizontal, toward A
+    { key: 'PA', a: 0,      b: .30*PI, ph: 0,     color: COL.PA, n: 3600, node: true },
+    { key: 'LA', a: .30*PI, b: .60*PI, ph: 0,     color: COL.LA, n: 3600, node: true },
+    { key: 'QA', a: .60*PI, b: .84*PI, ph: 0,     color: COL.Q,  n: 3000 },
+    { key: 'HA', a: .84*PI, b: PI,     ph: 0,     color: COL.H,  n: 2200 },
+    // horizontal, toward B
+    { key: 'PB', a: 0,      b: .30*PI, ph: PI,    color: COL.PB, n: 3600, node: true },
+    { key: 'LB', a: .30*PI, b: .60*PI, ph: PI,    color: COL.LB, n: 3600, node: true },
+    { key: 'QB', a: .60*PI, b: .84*PI, ph: PI,    color: COL.Q,  n: 3000 },
+    { key: 'HB', a: .84*PI, b: PI,     ph: PI,    color: COL.H,  n: 2200 },
+    // vertical, cosmological (up)
+    { key: 'CO', a: 0,      b: .50*PI, ph: PI/2,  color: COL.CO, n: 3800, node: true },
+    { key: 'QE', a: .50*PI, b: .80*PI, ph: PI/2,  color: COL.Q,  n: 3000 },
+    { key: 'HE', a: .80*PI, b: PI,     ph: PI/2,  color: COL.H,  n: 2200 },
+    // vertical, atomic (down)
+    { key: 'DN', a: 0,      b: .50*PI, ph: -PI/2, color: COL.DN, n: 3800, node: true },
+    { key: 'QF', a: .50*PI, b: .80*PI, ph: -PI/2, color: COL.Q,  n: 3000 },
+    { key: 'HF', a: .80*PI, b: PI,     ph: -PI/2, color: COL.H,  n: 2200 },
+  ];
+
+  const TUBE_R = 3.0;
+  const phiG = (1 + Math.sqrt(5)) / 2;
+  const goldenRates = [1, -1/phiG, 1/phiG**2, -1/phiG**3];
+  const flipSpeed = 0.02484;
+  const qFlat = new THREE.Quaternion();
+  const qPlane = new THREE.Quaternion().setFromEuler(new THREE.Euler(PI/2, 0, 0));
+  const axisX = new THREE.Vector3(1, 0, 0), axisY = new THREE.Vector3(0, 1, 0);
+
+  // orientation that maps local x to dir and local y to a chosen normal
+  function orient(dir, normalHint){
+    const x = dir.clone().normalize();
+    let y = normalHint.clone().sub(x.clone().multiplyScalar(normalHint.dot(x)));
+    if (y.lengthSq() < 1e-6) y = Math.abs(x.y) < 0.9 ? new THREE.Vector3(0,1,0) : new THREE.Vector3(1,0,0);
+    y.sub(x.clone().multiplyScalar(y.dot(x))).normalize();
+    const z = new THREE.Vector3().crossVectors(x, y);
+    const m = new THREE.Matrix4().makeBasis(x, y, z);
+    return new THREE.Quaternion().setFromRotationMatrix(m);
+  }
+
+  const figs = [];
+  function addCluster(center, half, orientQ, color, perFig, nFigs, opacity, sign, phase){
+    for (let f = 0; f < nFigs; f++) {
+      const tArr = new Float32Array(perFig), vArr = new Float32Array(perFig);
+      const tSpeed = new Float32Array(perFig), tr = new Float32Array(perFig);
+      for (let i = 0; i < perFig; i++) {
+        tArr[i] = Math.random() * PI * 2;
+        vArr[i] = Math.random() * PI * 2;
+        tSpeed[i] = 0.008 + Math.random() * 0.008;
+        tr[i] = 0.4 + Math.random() * 0.9;
+      }
+      const positions = new Float32Array(perFig * 3);
+      const geom = new THREE.BufferGeometry();
+      geom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      scene.add(new THREE.Points(geom, pointsMat(color, 2.4, opacity)));
+      figs.push({
+        center, half, orientQ,
+        baseQ: f % 2 === 0 ? qFlat : qPlane,
+        flipAxis: f === 3 ? axisY : axisX,
+        rate: goldenRates[f] * sign,
+        angle: phase + f * 0.41,
+        tArr, vArr, tSpeed, tr, positions, geom,
+        finalQ: new THREE.Quaternion(), flipQ: new THREE.Quaternion()
+      });
+    }
+  }
+  // the swept envelope of a cluster, as in the original field
+  function addEnvelope(center, half, orientQ, color, n, opacity){
+    const positions = new Float32Array(n * 3), v3 = new THREE.Vector3();
+    for (let i = 0; i < n; i++) {
+      const u = Math.random() * 2 - 1, axial = u * half;
+      const envR = Math.abs(axial) * Math.sqrt(Math.max(0, 1 - u * u)) * 0.5 + TUBE_R * 1.05;
+      const v = Math.random() * PI * 2, r = envR + (Math.random() - 0.5) * 2.5;
+      v3.set(axial, r * Math.cos(v), r * Math.sin(v)).applyQuaternion(orientQ).add(center);
+      positions[i*3] = v3.x; positions[i*3+1] = v3.y; positions[i*3+2] = v3.z;
+    }
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    scene.add(new THREE.Points(geom, pointsMat(color, 2.0, opacity)));
+  }
+
+  const surfaceNodes = [];
+  CHAINS.forEach((c, i) => {
+    const A = P(c.a, c.ph), B = P(c.b, c.ph);
+    const center = A.clone().add(B).multiplyScalar(0.5);
+    const half = A.distanceTo(B) / 2;
+    const dir = B.clone().sub(A);
+    const outward = center.lengthSq() > 1 ? center.clone().normalize() : new THREE.Vector3(0, 0, 1);
+    const q = orient(dir, outward);
+    const sign = (i % 2 === 0 ? 1 : -1);
+    addCluster(center, half, q, c.color, c.n, 4, 0.95, sign, i * 0.63);
+    addEnvelope(center, half, q, c.color, Math.round(c.n * 1.4), 0.75);
+    if (c.node) surfaceNodes.push({ key: c.key, at: P((c.a + c.b) / 2, c.ph), color: c.color });
+  });
+  surfaceNodes.push({ key: 'R', at: P(0, 0), color: COL.R });
+  surfaceNodes.push({ key: 'H', at: P(PI, 0), color: COL.H });
+
+  // core loops: a figure-eight from every surface node to meta-consciousness at the centre
+  surfaceNodes.forEach((s, i) => {
+    const center = s.at.clone().multiplyScalar(0.5);
+    const half = s.at.length() / 2;
+    const q = orient(s.at.clone().negate(), new THREE.Vector3(0.3, 1, 0.2));
+    addCluster(center, half, q, s.color, 2600, 2, 0.6, i % 2 ? 1 : -1, i * 0.9);
+  });
+
+  // glowing orbs: Reality (front), Horizon of Knowing (back), meta-consciousness (core)
+  const orbGroups = [];
+  function addOrb(center, rad, n, color, size, opacity, spin){
+    const pos = new Float32Array(n * 3);
+    for (let i = 0; i < n; i++) {
+      const t = Math.random() * PI * 2, ph = Math.acos(Math.random() * 2 - 1);
+      const r = rad * Math.pow(Math.random(), 2), sp = Math.sin(ph);
+      pos[i*3] = r * sp * Math.cos(t); pos[i*3+1] = r * Math.cos(ph); pos[i*3+2] = r * sp * Math.sin(t);
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const pts = new THREE.Points(g, pointsMat(color, size, opacity));
+    const grp = new THREE.Group(); grp.position.copy(center); grp.add(pts); scene.add(grp);
+    orbGroups.push({ grp, spin });
+    return grp;
+  }
+  addOrb(P(0, 0), 26, 4500, COL.R, 2.6, 0.9, 0.004);
+  addOrb(P(PI, 0), 30, 4500, COL.H, 2.6, 0.9, -0.004);
+  addOrb(new THREE.Vector3(), 46, 9000, COL.M, 2.8, 0.95, 0.006);
+  addOrb(new THREE.Vector3(), 90, 3500, COL.M, 2.2, 0.35, -0.006 / phiG);
+
+  // node spheres: translucent shells with a wireframe, as in the 3D representations
+  scene.add(new THREE.AmbientLight(0x4a6a90, 0.7));
+  { const key = new THREE.DirectionalLight(0xffffff, 0.9); key.position.set(400, 600, 500); scene.add(key); }
+  { const rim = new THREE.DirectionalLight(0x88b8ff, 0.35); rim.position.set(-500, -200, -400); scene.add(rim); }
+  function nodeSphere(center, rad, color, fillOp, wireOp, spin){
+    const grp = new THREE.Group();
+    grp.position.copy(center);
+    grp.add(new THREE.Mesh(
+      new THREE.SphereGeometry(rad, 48, 32),
+      new THREE.MeshPhongMaterial({ color, emissive: color, emissiveIntensity: 0.25, shininess: 60,
+        transparent: true, opacity: fillOp, depthWrite: false, side: THREE.DoubleSide })
+    ));
+    grp.add(new THREE.LineSegments(
+      new THREE.WireframeGeometry(new THREE.SphereGeometry(rad, 18, 12)),
+      new THREE.LineBasicMaterial({ color, transparent: true, opacity: wireOp, depthWrite: false })
+    ));
+    scene.add(grp);
+    orbGroups.push({ grp, spin });
+  }
+  surfaceNodes.forEach((s, i) => {
+    const big = s.key === 'R' || s.key === 'H';
+    nodeSphere(s.at, big ? 36 : 30, s.color, big ? 0.12 : 0.09, big ? 0.32 : 0.24, (i % 2 ? 1 : -1) * 0.003);
+  });
+  CHAINS.filter(c => c.key[0] === 'Q').forEach((c, i) => {
+    nodeSphere(P((c.a + c.b) / 2, c.ph), 22, COL.Q, 0.05, 0.2, (i % 2 ? 1 : -1) * 0.004);
+  });
+  nodeSphere(new THREE.Vector3(), 62, COL.M, 0.08, 0.26, 0.002);
+
+  // interconnecting lines between the node spheres
+  {
+    const at = {};
+    surfaceNodes.forEach(s => { at[s.key] = s.at; });
+    CHAINS.filter(c => c.key[0] === 'Q').forEach(c => { at[c.key] = P((c.a + c.b) / 2, c.ph); });
+    const colOf = { PA: COL.PA, LA: COL.LA, PB: COL.PB, LB: COL.LB, CO: COL.CO, DN: COL.DN, R: COL.R, H: COL.H, QA: COL.Q, QB: COL.Q, QE: COL.Q, QF: COL.Q };
+    const lines = new THREE.Group();
+    scene.add(lines);
+    function addLine(pts, color, opacity){
+      const g = new THREE.BufferGeometry().setFromPoints(pts);
+      lines.add(new THREE.Line(g, new THREE.LineBasicMaterial({ color, transparent: true, opacity, depthWrite: false, blending: THREE.AdditiveBlending })));
+    }
+    // great-circle arc over the surface, lifted just above it
+    function arc(a, b, color, opacity){
+      const ua = at[a].clone().normalize(), ub = at[b].clone().normalize();
+      const ang = ua.angleTo(ub), n = 48, pts = [];
+      for (let i = 0; i <= n; i++) {
+        const t = i / n;
+        let v;
+        if (ang < 1e-4) v = ua.clone();
+        else {
+          const s = Math.sin(ang);
+          v = ua.clone().multiplyScalar(Math.sin((1 - t) * ang) / s).add(ub.clone().multiplyScalar(Math.sin(t * ang) / s));
+        }
+        pts.push(v.multiplyScalar(RS * 1.012));
+      }
+      addLine(pts, color, opacity);
+    }
+    // along the chains: Reality to the Horizon of Knowing, every way round
+    [['R','PA','LA','QA','H'], ['R','PB','LB','QB','H'], ['R','CO','QE','H'], ['R','DN','QF','H']].forEach(chain => {
+      for (let i = 1; i < chain.length; i++) arc(chain[i-1], chain[i], colOf[chain[i]], 0.75);
+    });
+    // across the chains: rings joining neighbours at similar depth
+    [['PA','CO','PB','DN'], ['LA','CO','LB','DN'], ['QA','QE','QB','QF']].forEach(ring => {
+      for (let i = 0; i < ring.length; i++) arc(ring[i], ring[(i + 1) % ring.length], 0xc9d2f2, 0.32);
+    });
+    // spokes: every surface node to meta-consciousness at the core (not the quantum limits)
+    surfaceNodes.forEach(s => addLine([s.at.clone(), new THREE.Vector3()], COL.M, 0.45));
+  }
+
+  // repelled field lines: from each quantum limit, curving out away from meta-consciousness
+  // and bending back to the Horizon of Knowing, with particles drifting along them
+  const flowUpdates = [];
+  {
+    const H = P(PI, 0);
+    const hDir = H.clone().normalize();
+    const cQ = new THREE.Color(COL.Q), cH = new THREE.Color(COL.H);
+    CHAINS.filter(c => c.key[0] === 'Q').forEach((c, qi) => {
+      const q = P((c.a + c.b) / 2, c.ph);
+      const qDir = q.clone().normalize();
+      let lat = new THREE.Vector3().crossVectors(qDir, hDir);
+      if (lat.lengthSq() < 1e-6) lat.set(0, 1, 0);
+      lat.normalize();
+      const mid = qDir.clone().add(hDir).normalize();
+      for (let k = -2; k <= 2; k++) {
+        const push = 1.35 + 0.12 * Math.abs(k) + (k === 0 ? 0.18 : 0);
+        const c1 = qDir.clone().multiplyScalar(RS * push).add(lat.clone().multiplyScalar(k * 34));
+        const c2 = mid.clone().multiplyScalar(RS * (push + 0.22)).add(lat.clone().multiplyScalar(k * 48));
+        const curve = new THREE.CubicBezierCurve3(q.clone(), c1, c2, H.clone());
+        const pts = curve.getPoints(80);
+        const cols = new Float32Array(pts.length * 3);
+        pts.forEach((p, i) => { const col = cQ.clone().lerp(cH, i / (pts.length - 1)); cols[i*3] = col.r; cols[i*3+1] = col.g; cols[i*3+2] = col.b; });
+        const g = new THREE.BufferGeometry().setFromPoints(pts);
+        g.setAttribute('color', new THREE.BufferAttribute(cols, 3));
+        scene.add(new THREE.Line(g, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: k === 0 ? 0.8 : 0.45, depthWrite: false, blending: THREE.AdditiveBlending })));
+        // drifting particles along the line
+        const n = 70, pos = new Float32Array(n * 3), ts = new Float32Array(n), sp = new Float32Array(n);
+        for (let i = 0; i < n; i++) { ts[i] = Math.random(); sp[i] = 0.0016 + Math.random() * 0.0018; }
+        const pg = new THREE.BufferGeometry();
+        pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        scene.add(new THREE.Points(pg, pointsMat(0xdcd8ff, 3.0, 0.85)));
+        const tmp = new THREE.Vector3();
+        flowUpdates.push(() => {
+          for (let i = 0; i < n; i++) {
+            if (!reduce) ts[i] = (ts[i] + sp[i]) % 1;
+            curve.getPoint(ts[i], tmp);
+            pos[i*3] = tmp.x; pos[i*3+1] = tmp.y; pos[i*3+2] = tmp.z;
+          }
+          pg.attributes.position.needsUpdate = true;
+        });
+      }
+    });
+  }
+
+  // the sphere's surface: a faint silver skin
+  {
+    const n = 16000, pos = new Float32Array(n * 3);
+    for (let i = 0; i < n; i++) {
+      const t = Math.random() * PI * 2, ph = Math.acos(Math.random() * 2 - 1);
+      const r = RS + (Math.random() - 0.5) * 5, sp = Math.sin(ph);
+      pos[i*3] = r * sp * Math.cos(t); pos[i*3+1] = r * Math.cos(ph); pos[i*3+2] = r * sp * Math.sin(t);
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const pts = new THREE.Points(g, pointsMat(0x8fa0d8, 1.6, 0.16));
+    const grp = new THREE.Group(); grp.add(pts); scene.add(grp);
+    orbGroups.push({ grp, spin: 0.0006 });
+  }
+
+  // --- text sprites: labels and the two equations ---
+  function textSprite(lines, opts){
+    const c = document.createElement('canvas');
+    const W = 1024, LH = opts.size * 1.25;
+    c.width = W; c.height = Math.ceil(LH * lines.length + opts.size * 0.6);
+    const ctx = c.getContext('2d');
+    function draw(){
+      ctx.clearRect(0, 0, c.width, c.height);
+      ctx.font = opts.font.replace('{s}', opts.size);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      lines.forEach((l, i) => {
+        const y = opts.size * 0.3 + LH * (i + 0.5);
+        ctx.lineWidth = opts.size * 0.18; ctx.strokeStyle = 'rgba(5,6,17,0.85)'; ctx.strokeText(l, W / 2, y);
+        ctx.fillStyle = opts.color; ctx.fillText(l, W / 2, y);
+      });
+    }
+    draw();
+    const tex = new THREE.CanvasTexture(c);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { draw(); tex.needsUpdate = true; });
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: opts.opacity || 0.9, depthTest: false, depthWrite: false });
+    const s = new THREE.Sprite(mat);
+    const w = opts.width;
+    s.scale.set(w, w * c.height / W, 1);
+    s.position.copy(opts.at);
+    scene.add(s);
+    return s;
+  }
+  const LBL = "600 {s}px Inter, system-ui, sans-serif";
+  const lbl = (lines, at, color, width, op) => textSprite(lines, { font: LBL, size: 64, color, at, width: width || 110, opacity: op });
+  lbl(['Reality'], P(0, 0, RS + 52), '#ffe4a8', 90);
+  lbl(['Horizon of Knowing'], P(PI, 0, RS + 52), '#c7d0ff', 150);
+  lbl(['Meta-consciousness'], new THREE.Vector3(0, -112, 0), '#ffd77a', 150);
+  lbl(['Person A'], P(.15*PI, 0, RS + 40), '#ffc9bd', 80, 0.75);
+  lbl(['Person B'], P(.15*PI, PI, RS + 40), '#c2d4ff', 80, 0.75);
+  lbl(['Lived A'], P(.45*PI, 0, RS + 40), '#ffa3a3', 72, 0.75);
+  lbl(['Lived B'], P(.45*PI, PI, RS + 40), '#a8e1ff', 72, 0.75);
+  lbl(['Cosmos'], P(.25*PI, PI/2, RS + 40), '#f6d27a', 72, 0.75);
+  lbl(['DNA / Atoms'], P(.25*PI, -PI/2, RS + 40), '#ffe2a6', 96, 0.75);
+  lbl(['Quantum field'], P(.72*PI, 0, RS + 40), '#fff1c9', 110, 0.8);
+  lbl(['Quantum field'], P(.72*PI, PI, RS + 40), '#fff1c9', 110, 0.8);
+  lbl(['Entanglement'], P(.65*PI, PI/2, RS + 40), '#fff1c9', 110, 0.8);
+  lbl(['Quantum foam'], P(.65*PI, -PI/2, RS + 40), '#fff1c9', 110, 0.8);
+
+  const EQ = 'italic {s}px "STIX Two Text", "Cambria Math", "Times New Roman", serif';
+  textSprite(['Φᴀ + Φʙ + Φᴄ + Φᴍ = 0'], { font: EQ, size: 56, color: '#ffe4a8', at: P(0, 0, RS + 22).add(new THREE.Vector3(0, -34, 0)), width: 70, opacity: 0.7 });
+  textSprite(['Ω = Ω ⊕ ε(Ω)  ·  ε ≢ 0'], { font: EQ, size: 56, color: '#ffe9b0', at: new THREE.Vector3(0, 70, 0), width: 120, opacity: 0.75 });
+
+  // --- animation ---
+  const _v = new THREE.Vector3();
+  let paused = false;
+  let onScreen = false, running = false;
+  function setRun(){
+    const should = onScreen && !document.hidden;
+    paused = !should;
+    if (should && !running) { running = true; requestAnimationFrame(animate); }
+  }
+  new IntersectionObserver(es => { onScreen = es[0].isIntersecting; setRun(); }, { rootMargin: '100px' }).observe(stage);
+  document.addEventListener('visibilitychange', setRun);
+
+  function animate(){
+    if (paused) { running = false; return; }
+    for (const f of figs) {
+      if (!reduce) f.angle += f.rate * flipSpeed;
+      f.flipQ.setFromAxisAngle(f.flipAxis, f.angle);
+      f.finalQ.copy(f.orientQ).multiply(f.baseQ).multiply(f.flipQ);
+      const pos = f.positions, h = f.half, c = f.center, q = f.finalQ;
+      const tArr = f.tArr, vArr = f.vArr, tSp = f.tSpeed, tr = f.tr;
+      for (let k = 0, n = tArr.length; k < n; k++) {
+        if (!reduce) { tArr[k] += tSp[k]; vArr[k] += 0.012; }
+        const tt = tArr[k], ct = Math.cos(tt), st = Math.sin(tt), c2t = Math.cos(2 * tt);
+        const lpx = h * ct, lpy = h * st * ct;
+        let tgx = -st, tgy = c2t;
+        const tm = Math.hypot(tgx, tgy) || 1e-6; tgx /= tm; tgy /= tm;
+        const cv = Math.cos(vArr[k]), sv = Math.sin(vArr[k]), r = tr[k] * TUBE_R;
+        _v.set(lpx + r * cv * -tgy, lpy + r * cv * tgx, r * sv).applyQuaternion(q);
+        const o = k * 3;
+        pos[o] = _v.x + c.x; pos[o+1] = _v.y + c.y; pos[o+2] = _v.z + c.z;
+      }
+      f.geom.attributes.position.needsUpdate = true;
+    }
+    for (const u of flowUpdates) u();
+    if (!reduce) {
+      for (const o of orbGroups) o.grp.rotation.y += o.spin;
+      // golden-ratio counter-rhythm, as in the original field
+      scene.rotation.y += 0.0012;
+      camState.theta -= 0.0012 * 0.618;
+      updateCamera();
+    }
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+
+  // --- pointer controls ---
+  const el = renderer.domElement;
+  el.style.touchAction = 'pan-y';
+  const pointers = new Map();
+  let lastPinch = 0;
+  el.addEventListener('pointerdown', e => { el.setPointerCapture(e.pointerId); pointers.set(e.pointerId, { x: e.clientX, y: e.clientY }); });
+  el.addEventListener('pointermove', e => {
+    if (!pointers.has(e.pointerId)) return;
+    const prev = pointers.get(e.pointerId);
+    const dx = e.clientX - prev.x, dy = e.clientY - prev.y;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 1) {
+      camState.theta -= dx * 0.006;
+      if (e.pointerType === 'mouse') camState.phi = Math.max(0.05, Math.min(PI - 0.05, camState.phi - dy * 0.006));
+      updateCamera();
+    } else if (pointers.size === 2) {
+      const pts = Array.from(pointers.values());
+      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+      if (lastPinch > 0) { camState.radius = Math.max(120, Math.min(3000, camState.radius * lastPinch / dist)); updateCamera(); }
+      lastPinch = dist;
+    }
+  });
+  const up = e => { pointers.delete(e.pointerId); if (pointers.size < 2) lastPinch = 0; };
+  el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up); el.addEventListener('pointerleave', up);
+
+  setRun();
+})();
+</script>
+
+</body></html>
