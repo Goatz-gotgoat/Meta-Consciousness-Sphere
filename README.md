@@ -1,8 +1,7 @@
 ## meta-consciousness-sphere.html
 
 The Recursive Continuum folded into a sphere, part of Recursive Process Monism (RPM).
-
-- [Meta-Consciousness Field](meta-consciousness-field.html): the 3D particle field, full screen. Drag to turn, scroll or pinch to zoom.
+the 3D particle field, full screen. Drag to turn, scroll or pinch to zoom.
 
 **What the figure shows**
 
