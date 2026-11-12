@@ -36,6 +36,9 @@ main { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column;
 header { display: flex; flex-direction: column; gap: 12px; max-width: 760px; }
 .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin: 0; }
 h1 { font-family: var(--display); font-weight: 700; font-size: clamp(36px, 6vw, 64px); line-height: 1.02; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+.byline { font-size: 15px; letter-spacing: 0.02em; color: var(--ink); margin: -4px 0 0; }
+.byline a { color: var(--gold); text-decoration: none; }
+.byline a:hover { text-decoration: underline; }
 .lede { font-size: 19px; line-height: 1.55; color: var(--muted); margin: 0; max-width: 62ch; }
 
 .stage { display: flex; flex-direction: column; gap: 16px; }
@@ -172,6 +175,7 @@ a { color: var(--gold); }
   <header>
     <p class="eyebrow">Recursive Process Monism</p>
     <h1>Meta-consciousness</h1>
+    <p class="byline">George Wanjau &middot; <a href="https://orcid.org/0009-0008-6207-5020" rel="author">ORCID 0009-0008-6207-5020</a></p>
     <p class="lede">Fold the Recursive Continuum into a sphere. Its outer edge closes into one crossing, the Chiasm, ringed by the Horizon of Knowing, and meta-consciousness sits at the core. The dark background stands for consciousness itself. Step through the fold below.</p>
     <div class="tour-row">
       <button type="button" id="tour-btn" class="tour-btn">Play the tour</button>
@@ -256,6 +260,12 @@ a { color: var(--gold); }
         <p><b>At entanglement, the trace.</b> When two quantum systems are entangled, the state of one part on its own is found by tracing out the other: the operation is literally called the partial trace. If the two were entangled, what remains is mixed. The part&#8217;s own state carries the mark of a relation it cannot see from where it stands. In the standard mathematics of quantum theory, the inside of a part holds traces of the whole it belongs to: the lived side holding traces of the seen. The symbol sits beside the entanglement node in the field.</p>
       </div>
     </div>
+    <div class="eqs">
+      <div class="eq">
+        <div class="formula">&#964;M&#775; = x&#772; &#8722; M &nbsp;&nbsp;&middot;&nbsp;&nbsp; x&#775;<sub>i</sub> = f<sub>i</sub>(x<sub>i</sub>) + k(M &#8722; x<sub>i</sub>) &nbsp;&nbsp;&middot;&nbsp;&nbsp; x = Sx + (I &#8722; S)x</div>
+        <p><b>At the core, from the material side: the unconscious.</b> Met from inside, the core registers the whole while knowing none of its parts. Its state M follows the average of every part, x&#772;, and keeps a fading memory of that history over a time &#964;; which part is which never enters it. Each part answers back. It keeps its own course, f<sub>i</sub>, and is drawn toward the whole at strength k, so every part carries the shape of the whole inside it: the trace. The registration also splits every state exactly in two. Sx is what it holds, the trace; (I &#8722; S)x is what it leaves, the residue, and the residue stays above zero whenever any two parts differ. Seen from consciousness, this same layer is the outer glow that holds everything. Met from the material plane, it is the unconscious, where being keeps organising past the end of knowing. One layer, two faces, each the mirror of the other.</p>
+      </div>
+    </div>
     <p>Together the two equations say that the joints balance while the whole stays open. The name fits the shape: in rhetoric, a chiasmus mirrors itself around a centre, as in &#8220;Ask not what your country can do for you; ask what you can do for your country.&#8221; Mirrored balance around a centre is what an equals sign expresses.</p>
     <p>The far side also echoes quantum mechanics. The arrows behave like particles: discrete, each with a path you can follow, and they stop at the gate. The glowing flow behaves like a wave: continuous, spread along every line, and it passes through. Each shows one side of the picture, as in Bohr&#8217;s complementarity. The faint flow across the narrow gap resembles tunnelling, whose chance falls off with a barrier&#8217;s width yet stays above zero for any finite barrier: a residue in quantum form.</p>
     <p class="note">These are structural parallels: the same shape recurring in physics and in the figure. They illustrate the framework and leave its claims to be tested on their own terms.</p>
@@ -277,16 +287,16 @@ a { color: var(--gold); }
         <p>A part cannot step outside the whole to see it entire. Every description made from inside leaves a residue, and it never reaches zero.</p>
       </div>
     </div>
-    <p>The black background stands for consciousness itself. Dark here means unlit, not empty. Consciousness is what everything appears in, so it is never one of the things that appear. Three roles stay distinct throughout. Consciousness is the ground, the dark. Meta-consciousness is the layer where it distinguishes itself, the core from within and the outer glow from consciousness. The Chiasm is the crossing, where knowing ends and being carries on.</p>
+    <p>The black background stands for consciousness itself. Dark here means unlit, not empty. Consciousness is what everything appears in, so it is never one of the things that appear. Three roles stay distinct throughout. Consciousness is the ground, the dark. Meta-consciousness is the layer where it distinguishes itself, the core from within and the outer glow from consciousness. Met from the material side, the same layer is the unconscious: the many gathered into one, beneath anyone&#8217;s knowing. The glow and the unconscious mirror each other across it. The Chiasm is the crossing, where knowing ends and being carries on.</p>
     <p>That explains why the search for consciousness keeps failing in the same way. You cannot find darkness by shining a light on it, because wherever the light lands, the darkness is gone. Observing is a light: it shows things, never the ground they appear in. From the inside the picture flips. There, consciousness is not dark at all. It is the light you see everything by, and a light cannot be lit by another light. Dark from the outside and light from the inside are two descriptions of one thing, which is the figure's duality and nonduality again.</p>
-    <p>Quantum physics approaches the continuum from the seen side, through measurement, and stalls at the measurement problem: how a spread of possibilities becomes the single outcome an observer sees. Its interpretations agree on every prediction and disagree on what is happening. The study of consciousness approaches it from the lived side, through experience, and stalls at the hard problem: how physical processes become something felt. Each problem is the other turned around. One asks how the seen gives rise to the lived; the other asks how observing gives rise to the seen. On this view both are parts describing the whole from inside it, so the shared wall is expected. It follows from where the observer stands.</p>
+    <p>Quantum physics approaches the continuum from the seen side, through measurement, and stalls at the <em>measurement problem</em>: how a spread of possibilities becomes the single outcome an observer sees. Its interpretations agree on every prediction and disagree on what is happening. The study of consciousness approaches it from the lived side, through experience, and stalls at the <em>hard problem</em>: how physical processes become something felt. Each problem is the other turned around. One asks how the seen gives rise to the lived; the other asks how observing gives rise to the seen. On this view both are parts describing the whole from inside it, so the shared wall is expected. It follows from where the observer stands.</p>
     <div class="eqs"><div class="eq">
       <div class="formula">S <span class="op">&#8603;</span> L &nbsp;&nbsp;&middot;&nbsp;&nbsp; L <span class="op">&#8603;</span> S &nbsp;&nbsp;&middot;&nbsp;&nbsp; P = L &#8734; S, &nbsp; &#949; <span class="op">&#8802;</span> 0</div>
-      <p><b>One gap, seen from both sides.</b> Every description is made by a part from inside the whole. A description that starts from the seen cannot arrive at the lived: that is the hard problem. A description that starts from the lived, from observing, cannot arrive at the seen outcome: that is the measurement problem, read from this side. Both stall for the same reason, the Hard Recursive Bind: the one describing is part of what is described, so it can never stand outside the joint to derive one side from the other. The two are joined at &#8734;, and what neither derivation reaches is the residue, &#949;. From within, they are two problems with the same shape; from the whole, they are one gap met from opposite ends.</p>
+      <p><b>One gap, seen from both sides.</b> Every description is made by a part from inside the whole. A description that starts from the seen cannot arrive at the lived: that is the <em>hard problem</em>. A description that starts from the lived, from observing, cannot arrive at the seen outcome: that is the <em>measurement problem</em>, read from this side. Both stall for the same reason, the <strong>Hard Recursive Bind</strong>: the one describing is part of what is described, so it can never stand outside the joint to derive one side from the other. The two are joined at &#8734;, and what neither derivation reaches is the residue, &#949;. From within, they are two problems with the same shape; from the whole, they are one gap met from opposite ends.</p>
     </div></div>
     <div class="eqs"><div class="eq">
       <div class="formula">true <span class="op">&#8835;</span> provable</div>
-      <p><b>Mathematics meets the same shape of gap.</b> It seems the one field beyond reproach, yet it has both problems in its own form. Benacerraf asked how a mind could ever know numbers if they are abstract objects outside space and time: the lived side reaching for the seen. Wigner asked why mathematics built in thought fits the physical world so exactly: the reverse direction. And G&#246;del showed that in any consistent system rich enough for arithmetic, some truths cannot be proved inside it. Truth outruns proof, so even here the residue stays, &#949; <span class="op">&#8802;</span> 0. From within, mind, matter and mathematics are separate fields with the same shape of limit; the separation is itself a distinction made from inside.</p>
+      <p><b>Mathematics meets the same shape of gap.</b> It seems the one field beyond reproach, yet it has both problems in its own form. Benacerraf asked how a mind could ever know numbers if they are abstract objects outside space and time: the lived side reaching for the seen. Wigner asked why mathematics built in thought fits the physical world so exactly: the reverse direction. And <strong><em>G&#246;del</em></strong> showed that in any consistent system rich enough for arithmetic, some truths cannot be proved inside it. Truth outruns proof, so even here the residue stays, &#949; <span class="op">&#8802;</span> 0. From within, mind, matter and mathematics are separate fields with the same shape of limit; the separation is itself a distinction made from inside.</p>
       <p>It also shows why asking the joint for an origin is a category error. The + sign acts on numbers and assumes them; it was never going to say where numbers come from. The joint &#8734; acts within consciousness in the same way. A number has no lived side of its own; the one counting does.</p>
     </div></div>
     <p class="note">The quantum labels mark where description runs out. Placing them on the sphere expresses a proposed philosophical relationship. It does not claim a demonstrated physical mechanism.</p>
@@ -300,7 +310,7 @@ a { color: var(--gold); }
       <p>It relates to us through the trace. Think of a video game. The lived side is the player: the one who feels, chooses and plays. The seen side is the character: its body, its abilities and its path, all shaped by the rules and the world of the game. Play long enough and the player begins to take themselves for the character, feeling its wins and losses as their own. Each of us is that kind of part. What you live is the player; what you see of yourself, and what others see of you, is the character the world has shaped. The attachment between them is the joint, &#8734;, and every move the character makes carries the world it was made in.</p>
       <p>And the player sees the game while the code it runs on stays out of sight. Every explanation of consciousness leaves a residue, &#949;, in the same way, which is why the question returns however far the explanation goes.</p>
       <p class="oneline">Consciousness leaves a trace in each of us, and a residue in every explanation of it.</p>
-      <p class="note">This is Recursive Process Monism&#8217;s philosophical answer, close to neutral monism. In science the hard problem remains open; the framework accounts for why it resists a final answer.</p>
+      <p class="note">This is Recursive Process Monism&#8217;s philosophical answer, close to neutral monism. In science the <em>hard problem</em> remains open; the framework accounts for why it resists a final answer.</p>
     </div>
   </section>
 
@@ -310,6 +320,7 @@ a { color: var(--gold); }
       <dl>
         <dt>Consciousness</dt><dd>The black background, the page included. Every node, loop and horizon appears within it, and everything past the Horizon of Knowing is consciousness itself. Dark means unlit from the outside, not empty; from the inside it is the light everything is seen by.</dd>
         <dt>Meta-consciousness</dt><dd>The core of the sphere, equally near every point on it. Every surface node loops into it. It is a figure drawn to illustrate how consciousness interconnects; consciousness itself is the dark ground. The lines through the Chiasm return to it too, so what lies beyond the gate is the same meta-consciousness that sits at the centre. From inside it is the centre; from the side of consciousness it is the whole we are held in.</dd>
+        <dt>Unconscious</dt><dd>Meta-consciousness met from the material side. It registers the whole without knowing its parts, remembers the history of that whole, and gives each part the shape of the whole it carries: the trace. What its registration leaves out is the residue. From consciousness the same layer is the outer glow; the two faces mirror each other.</dd>
         <dt>Janus</dt><dd>The two-faced form shared by every orb in the field. Each node is one sphere with two halves: lived (warm) turned toward meta-consciousness, seen (cool) turned toward the world and the viewer, joined at a bright seam. Reality is the largest case: the layer between Reality and consciousness is one face looking two ways, the world as object and the world as lived. Each face shows what the other cannot.</dd>
         <dt>Seen meets lived</dt><dd>Through the core, each person’s seen side lines up with the other’s lived side. Lived never touches lived; how one person appears meets how the other lives. The two diagonals cross at meta-consciousness.</dd>
         <dt>Horizon of Knowing</dt><dd>The limit of human understanding, drawn as the bowed lines around the far side. Every line of inquiry reaches it, from the lived side or the seen side, and it moves as inquiry moves.</dd>
@@ -377,8 +388,8 @@ a { color: var(--gold); }
   const CORES = ['R', 'PA', 'PB', 'LA', 'LB', 'CO', 'DN', 'H'];
 
   const STEPS = [
-    { name: 'Flat map', title: 'The map you started with',
-      text: 'This is the Recursive Continuum as you first drew it. Each person appears twice, as lived and as seen. Two people meet only through shared reality in the middle. Cosmos sits above, DNA and atoms below, and a yellow edge holds everything.',
+    { name: 'Flat map', title: 'The map as it first appears',
+      text: 'This is the Recursive Continuum as it first appears. Each person appears twice, as lived and as seen. Two people meet only through shared reality in the middle. Cosmos sits above, DNA and atoms below, and a yellow edge holds everything.',
       t: { fold: 0, ext: 0, meta: 0, core: 0, shell: 0 } },
     { name: 'Ends', title: 'The four ends reach the edge',
       text: 'Each outer end gets figure-eights of its own, running out to the edge. These are the places where description runs out: the quantum field at both sides, entanglement at the top, quantum foam at the bottom. Physics reaches them from the seen side, in formulations that never quite close.',
@@ -1577,9 +1588,10 @@ a { color: var(--gold); }
       fly: [{ t: 0, pos: [300, 210, 960], tgt: [0, 0, 100] }, { t: 3.14, pos: [1050, 260, -380], tgt: [0, 0, -380] }] },
     { layer: '3d', dur: 6.23, text: '…and knowledge stops at the gate, the Chiasm. Being passes through.',
       fly: [{ t: 0, pos: [1050, 260, -380], tgt: [0, 0, -380] }, { t: 3.5, pos: [430, 120, -640], tgt: [0, 0, -430] }, { t: 6.23, pos: [430, 120, -640], tgt: [0, 0, -430] }] },
-    { layer: '2d', step: 5, dur: 8.32, text: 'All of it appears in the dark: consciousness itself. Wherever a light falls, the dark is gone.' },
+    { layer: '3d', dur: 8.32, text: 'All of it appears in the dark: consciousness itself. Wherever a light falls, the dark is gone.',
+      fly: [{ t: 0, pos: [430, 120, -640], tgt: [0, 0, -430] }, { t: 8.32, pos: [720, 260, -470], tgt: [0, 0, -330] }] },
     { layer: '3d', dur: 17.5, text: '<span class="th-eq">Ω = Ω ⊕ ε(Ω), &nbsp;ε ≢ 0</span><br>The joints balance, and the whole stays open.',
-      fly: [{ t: 0, pos: [430, 120, -640], tgt: [0, 0, -430] }, { t: 13.61, pos: [1250, 520, 420], tgt: [0, 0, -200] }, { t: 17.5, pos: [1265, 528, 440], tgt: [0, 0, -200] }] }
+      fly: [{ t: 0, pos: [720, 260, -470], tgt: [0, 0, -330] }, { t: 13.61, pos: [1250, 520, 420], tgt: [0, 0, -200] }, { t: 17.5, pos: [1265, 528, 440], tgt: [0, 0, -200] }] }
   ];
   let timers = [], running = false, paused = false, clock = 0, last = 0, ticker = null;
   const voice = document.getElementById('th-voice'), pauseBtn = document.getElementById('th-pause');
